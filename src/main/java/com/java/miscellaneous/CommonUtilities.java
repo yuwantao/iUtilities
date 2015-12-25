@@ -25,7 +25,7 @@ public class CommonUtilities {
         ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
         URL[] urLs = ((URLClassLoader) systemClassLoader).getURLs();
         for (URL url : urLs) {
-            System.out.println(url.getFile());
+//            System.out.println(url.getFile());
         }
     }
 }

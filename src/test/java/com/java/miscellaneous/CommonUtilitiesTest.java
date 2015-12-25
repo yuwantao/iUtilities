@@ -1,5 +1,7 @@
 package com.java.miscellaneous;
 
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -21,5 +23,10 @@ public class CommonUtilitiesTest {
     public void testGetCurrentWorkingDir() throws Exception {
         String curWorkingDir = System.getProperty("user.dir");
         assertEquals(curWorkingDir, CommonUtilities.getCurrentWorkingDir());
+    }
+
+    @Test
+    public void testPrintClasspath() throws Exception {
+        CommonUtilities.printClasspath();
     }
 }
