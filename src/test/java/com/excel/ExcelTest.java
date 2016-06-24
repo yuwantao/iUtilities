@@ -64,6 +64,21 @@ public class ExcelTest {
 	}
 
 	@Test
+	public void populate_to_excel_from_db() {
+		File file = new File("e:\\tmp\\elsevier.xlsx");
+		InputStream in = null;
+		Workbook wb = null;
+		try {
+			in = new FileInputStream(file);
+			wb = new XSSFWorkbook(in);
+			Sheet sheet = wb.getSheetAt(0);
+			Row head = sheet.createRow(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
 	public void test_max_rows_per_sheet_in_xlsx() {
 		File file = new File("e:\\tmp\\tmp.xlsx");
 		InputStream in = null;

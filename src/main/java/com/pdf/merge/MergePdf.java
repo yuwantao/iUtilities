@@ -26,8 +26,9 @@ public class MergePdf {
 			}
 		});
 		try {
-			ut.setDestinationFileName("E:\\download\\pdf_merge\\data\\merge.pdf");
-			MemoryUsageSetting mus = MemoryUsageSetting.setupMixed(1024 * 1024 * 1024, 2 * 1024 * 1024 * 1024);
+			ut.setDestinationFileName("E:\\download\\pdf_merge\\merge.pdf");
+//			MemoryUsageSetting mus = MemoryUsageSetting.setupMixed(1024 * 1024 * 1024, 2 * 1024 * 1024 * 1024);
+			MemoryUsageSetting mus = MemoryUsageSetting.setupTempFileOnly();
 			mus.setTempDir(new File("E:\\download\\pdf_merge\\tmp"));
 //			MemoryUsageSetting mus = MemoryUsageSetting.setupMainMemoryOnly();
 			ut.mergeDocuments(mus);
@@ -42,7 +43,7 @@ public class MergePdf {
 	private static List<File> getSources() {
 		List<File> files = new ArrayList<>();
 		try {
-			Files.walk(Paths.get("e:\\download\\pdf_merge\\data")).forEach(filePath -> {
+			Files.walk(Paths.get("e:\\download\\crawler-newspaper\\human-nature\\test\\")).forEach(filePath -> {
 				if (Files.isRegularFile(filePath)) {
 					files.add(filePath.toFile());
 				}

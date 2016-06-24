@@ -2,7 +2,6 @@ package com.ftp;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.IOException;
@@ -34,26 +33,39 @@ public class FtpTest {
 				System.out.println("login to ftp server failed..");
 			}
 			ftp.enterLocalPassiveMode();
-			ftp.setFileType(FTP.ASCII_FILE_TYPE);
+			ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			ftp.setControlEncoding("utf-8");
 
-//			if (ftp.makeDirectory("tmp")) {
-//				System.out.println("make directory succeeded.");
-//			}
+			ftp.makeDirectory("gmrb");
+			ftp.makeDirectory("gmrb/2016");
 //
 //			System.out.println("ftp status: " + ftp.getStatus());
 //
-			FTPFile[] ftpFiles = ftp.listFiles();
-			for (FTPFile f : ftpFiles) {
-				System.out.println(f.getName());
-			}
+//			String workingDir = "qczy/2016-01-15";
+//			ftp.changeWorkingDirectory(workingDir);
+//			FTPFile[] ftpFiles = ftp.listFiles();
+//			System.out.println("file nums: " + ftpFiles.length);
+//			for (FTPFile f : ftpFiles) {
+////				System.out.println(f.getName());
+//				String fileName = f.getName();
+//				File dest = FileUtils.createFile("e:\\download\\ftp\\download\\qczy\\2016-01-15\\" + fileName);
+//				FileOutputStream out = new FileOutputStream(dest);
+//				boolean b = ftp.retrieveFile(fileName, out);
+//				if (b) {
+//					System.out.println("retrieve file succeed: " + fileName);
+//				}
+//				out.close();
+//			}
+
 //			FileInputStream inputStream = new FileInputStream("e:\\download\\nginx.pdf");
-//			if (ftp.storeFile("nginx.pdf", inputStream)) {
+//			if (ftp.storeFile("nginx1.pdf", inputStream)) {
 //				System.out.println("store file to server succeeded.");
 //			}
 
 //			File file = FileUtils.createFile("e:\\download\\ftp\\nginx.pdf");
-//			ftp.retrieveFile("nginx.pdf", new FileOutputStream(file));
+//			FileOutputStream out = new FileOutputStream(file);
+//			ftp.retrieveFile("nginx.pdf", out);
+//			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally {
