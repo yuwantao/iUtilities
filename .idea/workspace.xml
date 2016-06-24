@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="649c5cb8-2749-44da-8241-823c7fca1a3c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/ftp/FtpTest.java" afterPath="$PROJECT_DIR$/src/main/java/com/ftp/FtpTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/pdf/merge/MergePdf.java" afterPath="$PROJECT_DIR$/src/main/java/com/pdf/merge/MergePdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/excel/ExcelTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/excel/ExcelTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/jsch/JschTest.java" afterPath="$PROJECT_DIR$/src/main/java/com/jsch/TestJsch.java" />
-    </list>
+    <list default="true" id="649c5cb8-2749-44da-8241-823c7fca1a3c" name="Default" comment="" />
     <ignored path="iUtilities.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/../../../test/iUtilities/out/" />
@@ -1343,7 +1337,7 @@
       <workItem from="1465180904650" duration="19264000" />
       <workItem from="1465782840307" duration="1626000" />
       <workItem from="1465966798078" duration="1818000" />
-      <workItem from="1466479203754" duration="12696000" />
+      <workItem from="1466479203754" duration="12918000" />
     </task>
     <servers />
   </component>
@@ -1380,7 +1374,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="242943000" />
+    <option name="totallyTimeSpent" value="243165000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1932" height="1050" extended-state="0" />
