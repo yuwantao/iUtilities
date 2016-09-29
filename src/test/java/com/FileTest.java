@@ -1,5 +1,6 @@
 package com;
 
+import com.utils.FileUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -49,6 +50,17 @@ public class FileTest {
 				pdDocument.close();
 			}
 		}
+	}
+
+	@Test
+	public void windows_vs_linux() throws IOException {
+		FileUtils.createFile("/data/abc.txt");
+	}
+
+	@Test
+	public void test() throws FileNotFoundException {
+		FileInputStream inputStream = new FileInputStream("/data/pr/pis/PIS-024 Professional Photography.xls");
+		assert inputStream != null;
 	}
 
 	@Test

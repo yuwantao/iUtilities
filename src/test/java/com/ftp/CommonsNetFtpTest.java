@@ -1,16 +1,16 @@
 package com.ftp;
 
-import com.utils.FileUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.junit.Test;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.SocketException;
 
 /**
  * Created by yuwt on 2016/5/23.
@@ -27,24 +27,33 @@ public class CommonsNetFtpTest {
 	public void test_chinese_filename() {
 		FTPClient ftp = new FTPClient();
 		try {
-			String server = "192.168.10.205";
+			String server = "ftp.newspaperdirect.com";
+//			String server = "192.168.10.205";
+//			String server = "epub.cibtc.com.cn";
 			ftp.connect(server);
-			ftp.login("yuwt", "yuwt");
+			ftp.login("ChinaInterBookTrade", "a6pAM>ZZPA]a");
+//			ftp.login("yuwt", "yuwt");
+//			ftp.login("epubpr", "cibtc20167531");
+//			ftp.login("epub025", "cibtc20169292");
 			ftp.enterLocalPassiveMode();
 			ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			ftp.setControlEncoding("utf-8");
 
-			String dirName = "文萃报";
-			dirName = new String(dirName.getBytes("utf-8"), "iso-8859-1");
+			String dirName = "STORIES & ANECDOTES_SHORT STORY_MONTH END_20160620";
+//			dirName = new String(dirName.getBytes("utf-8"), "iso-8859-1");
 			ftp.makeDirectory(dirName);
+			ftp.changeWorkingDirectory(dirName);
+//			ftp.makeDirectory("abc");
+//			ftp.changeWorkingDirectory("abc");
+//			ftp.storeFile(new String("PIS-015 37° Women.xls".getBytes("utf-8"), "iso-8859-1"), new FileInputStream("e:\\data\\pr\\pis\\PIS-015 37° Women.xls"));
 
-			String path = "e:\\download\\tmp\\";
-			String fName = "封面.pdf";
-//			FileInputStream in = new FileInputStream(path + fName);
-//			ftp.storeFile(new String(fName.getBytes("utf-8"), "iso-8859-1"), in);
-
-			FileOutputStream out = new FileOutputStream(path + "1.pdf");
-			ftp.retrieveFile(fName, out);
+//			String path = "e:\\download\\tmp\\";
+//			String fName = "封面.pdf";
+////			FileInputStream in = new FileInputStream(path + fName);
+////			ftp.storeFile(new String(fName.getBytes("utf-8"), "iso-8859-1"), in);
+//
+//			FileOutputStream out = new FileOutputStream(path + "1.pdf");
+//			ftp.retrieveFile(fName, out);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally {
@@ -59,41 +68,124 @@ public class CommonsNetFtpTest {
 	}
 
 	@Test
+	public void get_encoding() {
+		FTPClient ftp = new FTPClient();
+		try {
+//			String server = "ftp.newspaperdirect.com";
+//			ftp.connect(server);
+//			ftp.login("ChinaInterBookTrade", "a6pAM>ZZPA]a");
+			String server = "192.168.10.205";
+			ftp.connect(server);
+			ftp.login("yuwt", "yuwt");
+			ftp.enterLocalPassiveMode();
+//			ftp.enterLocalActiveMode();
+//			ftp.enterRemotePassiveMode();
+			ftp.setFileType(FTP.BINARY_FILE_TYPE);
+//			ftp.setControlEncoding("utf-8");
+			System.out.println(ftp.getAutodetectUTF8());
+			System.out.println(ftp.getControlEncoding());
+
+		} catch (SocketException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_upload_file() {
+		FTPClient ftp = new FTPClient();
+		try {
+			String server = "192.168.10.205";
+			ftp.connect(server);
+			ftp.login("yuwt", "yuwt");
+			ftp.enterLocalPassiveMode();
+//			ftp.enterLocalActiveMode();
+			ftp.setFileType(FTP.BINARY_FILE_TYPE);
+			ftp.setControlEncoding("utf-8");
+//			ftp.setCharset(StandardCharsets.UTF_8);
+
+			String dirName = "YILIN GLOBAL CHILDREN’S LITERATURE_20160615";
+			dirName = new String(dirName.getBytes("utf-8"), "iso-8859-1");
+			ftp.makeDirectory(dirName);
+			ftp.changeWorkingDirectory(dirName);
+			boolean b = ftp.storeFile("nginx.pdf", new FileInputStream("e:\\download\\IntelliJIDEA_ReferenceCard.pdf"));
+			if (b) {
+				System.out.println("succeed");
+			} else {
+				System.out.println("Failed");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (SocketException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test_get_file_size() {
+		FTPClient ftp = new FTPClient();
+		try {
+			String server = "192.168.10.205";
+			ftp.connect(server);
+			ftp.login("yuwt", "yuwt");
+			ftp.enterLocalPassiveMode();
+//			ftp.enterLocalActiveMode();
+			ftp.setFileType(FTP.BINARY_FILE_TYPE);
+			ftp.setControlEncoding("utf-8");
+//			ftp.setCharset(StandardCharsets.UTF_8);
+			String workingDirectory = ftp.printWorkingDirectory();
+			System.out.println(workingDirectory);
+			FTPFile ftpFile = ftp.mlistFile("/abc/1.pdf");
+			System.out.println(ftpFile);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (SocketException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
 	public void test_retrieve_file() throws IOException {
 		FTPClient ftp = new FTPClient();
 		try {
 			String server = "epub.cibtc.com.cn";
 			ftp.connect(server);
-			ftp.login("epub027", "cibtc20161233");
-			ftp.enterLocalPassiveMode();
+			ftp.login("epub002", "cibtc20164086");
+//			ftp.enterLocalPassiveMode();
+			ftp.enterLocalActiveMode();
 			ftp.setFileType(FTP.BINARY_FILE_TYPE);
 			ftp.setControlEncoding("utf-8");
 //			ftp.setCharset(StandardCharsets.UTF_8);
 
-			String dirName = "儿童绘本";
-			dirName = new String(dirName.getBytes("utf-8"), "iso-8859-1");
-			ftp.changeWorkingDirectory(dirName);
+//			String dirName = "儿童绘本";
+//			dirName = new String(dirName.getBytes("utf-8"), "iso-8859-1");
+//			ftp.changeWorkingDirectory(dirName);
 
-//			String path = "e:\\download\\tmp\\";
-//			String fName = "不知道.txt";
+			String path = "e:\\download\\tmp\\";
+			String fName = "CHINA TODAY_CHINESE_20160805.pdf";
 ////			FileInputStream in = new FileInputStream(path + fName);
 ////			ftp.storeFile(new String(fName.getBytes("utf-8"), "iso-8859-1"), in);
 //
-//			FileOutputStream out = new FileOutputStream(path + "5.txt");
-//			ftp.retrieveFile(new String(fName.getBytes("utf-8"), "iso-8859-1"), out);
+			FileOutputStream out = new FileOutputStream(path + "1.pdf");
+			ftp.retrieveFile(new String(fName.getBytes("utf-8"), "iso-8859-1"), out);
 
-			FTPFile[] ftpFiles = ftp.listFiles();
-			for (FTPFile f : ftpFiles) {
-				String fName = f.getName();
-				System.out.println(fName);
-				if (fName.endsWith("四封.pdf")) {
-//					InputStream inputStream = ftp.retrieveFileStream(fName);
-//					System.out.println(inputStream.toString());
-					File dest = FileUtils.createFile("e:\\download\\tmp\\" + "四封.pdf");
-					FileOutputStream out = new FileOutputStream(dest);
-					ftp.retrieveFile(new String(fName.getBytes("utf-8"), "iso-8859-1"), out);
-				}
-			}
+//			FTPFile[] ftpFiles = ftp.listFiles();
+//			for (FTPFile f : ftpFiles) {
+//				String fName = f.getName();
+//				System.out.println(fName);
+//				if (fName.endsWith("四封.pdf")) {
+////					InputStream inputStream = ftp.retrieveFileStream(fName);
+////					System.out.println(inputStream.toString());
+//					File dest = FileUtils.createFile("e:\\download\\tmp\\" + "四封.pdf");
+//					FileOutputStream out = new FileOutputStream(dest);
+//					ftp.retrieveFile(new String(fName.getBytes("utf-8"), "iso-8859-1"), out);
+//				}
+//			}
 //			File dest = FileUtils.createFile("e:\\download\\tmp\\封面.pdf");
 //					FileOutputStream out = new FileOutputStream(dest);
 ////			String fileName = "上传说明.txt";

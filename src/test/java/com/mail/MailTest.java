@@ -17,24 +17,28 @@ public class MailTest {
 		String to = "yuwantao1109@gmail.com";
 
 		// Sender's email ID needs to be mentioned
+//		String from = "bkxm@mail.cibtc.com.cn";
 		String from = "yuwantao@readgo.cn";
 
 		// Assuming you are sending email from localhost
-		String host = "smtp.exmail.qq.com";
+		String host = "smtp.263.net";
+//		String host = "smtp.exmail.qq.com";
 
-		String username = "yuwantao@readgo.cn";
-		String password = "Rsrzrcj@7";
+		String username = "bkxm@mail.cibtc.com.cn";
+		String password = "bk3184";
+//		String username = "yuwantao@readgo.cn";
+//		String password = "Rsrzrcj@7";
 		// Get system properties
 		Properties props = System.getProperties();
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.user", from);
+		props.put("mail.smtp.user", username);
 		props.put("mail.smtp.password", password);
-		props.put("mail.smtp.port", "465");
+		props.put("mail.smtp.port", "25");
+//		props.put("mail.smtp.port", "465");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.debug", "true");
-		props.put("mail.smtp.socketFactory.class",
-				"javax.net.ssl.SSLSocketFactory");
+//		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 		// Get the default Session object.
 		Session session = Session.getDefaultInstance(props,  new javax.mail.Authenticator() {
@@ -48,7 +52,7 @@ public class MailTest {
 			MimeMessage message = new MimeMessage(session);
 
 			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from));
+			message.setFrom(new InternetAddress(username));
 
 			// Set To: header field of the header.
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));

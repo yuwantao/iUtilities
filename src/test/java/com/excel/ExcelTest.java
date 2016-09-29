@@ -4,10 +4,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 
@@ -17,6 +14,23 @@ import java.io.*;
  * Created by yuwt on 2016/4/25.
  */
 public class ExcelTest {
+
+	@Test
+	public void test_create_xlsx_from_scratch() {
+		Workbook wb = new XSSFWorkbook();
+		Sheet sheet = wb.createSheet();
+		Row headerRow = sheet.createRow(0);
+
+		CellStyle headerRowStyle = headerRow.getRowStyle();
+		Font headerRowFont = wb.createFont();
+		headerRowFont.setBold(true);
+
+		Cell cell0 = headerRow.createCell(0);
+		cell0.setCellType(Cell.CELL_TYPE_STRING);
+		cell0.setCellValue("CID");
+
+	}
+
 	@Test
 	public void test_max_rows_per_sheet_in_xls() {
 		File file = new File("e:\\tmp\\tmp.xls");
