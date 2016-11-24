@@ -42,8 +42,8 @@ public class PdfTest {
 
 	@Test
 	public void test_number_of_pages() throws IOException {
-		String path = "e:\\download\\pr\\crawler-newspaper\\";
-		String fileName = "BEIJING REVIEW_ENGLISH_20160908.pdf";
+		String path = "e:\\download\\";
+		String fileName = "CHINA SCENIC_20160401.pdf";
 		File file = new File(path + fileName);
 		PDDocument document = PDDocument.load(file);
 		System.out.println(document);
@@ -171,7 +171,7 @@ public class PdfTest {
 	public void create_from_image() {
 //		CCITTFactory.createFromFile();
 		PDDocument pdDocument = new PDDocument();
-		String path = "e:\\download\\crawler-newspaper\\china information world\\2016-08-02\\封底－康普.jpg";
+		String path = "e:\\download\\2016年青春期健康09最终.jpg";
 //		String path = "e:\\data\\pr\\marriage-family-documentary\\2016-07-01\\MARRIAGE AND FAMILY_DOCUMENTARY_20160701_封面.jpg";
 		BufferedImage image;
 		try {
@@ -184,7 +184,7 @@ public class PdfTest {
 			PDPageContentStream contentStream = new PDPageContentStream(pdDocument, pdPage);
 			contentStream.drawImage(pdImageXObject, 0, 0);
 			contentStream.close();
-			pdDocument.save("e:\\download\\crawler-newspaper\\china information world\\2016-08-02\\1.pdf");
+			pdDocument.save("e:\\download\\1.pdf");
 //			pdDocument.save("e:\\data\\pr\\marriage-family-documentary\\2016-07-01\\1.pdf");
 			pdDocument.close();
 		} catch (IOException e) {
