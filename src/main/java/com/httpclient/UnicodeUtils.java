@@ -5,11 +5,11 @@ package com.httpclient;
  */
 public class UnicodeUtils {
 	public static void main(String[] args) {
-		char c = '海';
-//		System.out.println( "\\u" + Integer.toHexString(c | 0x10000).substring(1) );
-		System.out.println(charToUnicode(c));
+//		char c = '海';
+////		System.out.println( "\\u" + Integer.toHexString(c | 0x10000).substring(1) );
+//		System.out.println(charToUnicode(c));
 
-		String str = "南海集";
+		String str = "长征出版社";
 		System.out.println(convertToKongfzQueryString(str));
 	}
 
