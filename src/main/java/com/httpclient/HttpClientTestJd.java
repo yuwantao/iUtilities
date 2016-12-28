@@ -2,7 +2,6 @@ package com.httpclient;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -20,7 +19,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import javax.net.ssl.SSLContext;
-import java.io.StringReader;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -66,25 +64,40 @@ public class HttpClientTestJd {
 				.build();
 
 //		String url = "https://search.jd.com/Search?keyword=9787535353536&enc=utf-8&qrst=1&rt=1&stop=1&book=y&vt=2&wtype=1";
-		String url = "https://item.jd.com/10538945.html";
+		String url = "http://dx.3.cn/desc/11687858?cdn=2&callback=showdesc";
 		HttpGet get = new HttpGet(url);
 		CloseableHttpResponse response3 = null;
 		try {
 			response3 = client.execute(get);
 			HttpEntity entity3 = response3.getEntity();
-			String content3 = EntityUtils.toString(entity3, "utf-8");
+			String content = EntityUtils.toString(entity3, "utf-8");
 			EntityUtils.consume(entity3);
 //			System.out.println(content3);
 
+			content = content.substring(9, content.length() - 1);
+
+			JsonParser jsonParser = new JsonParser();
+			JsonElement detailElement = jsonParser.parse(content);
+			String detailContentText = detailElement.getAsJsonObject().get("content").getAsString();
+
+			Document detailDoc = Jsoup.parse(detailContentText);
+			Elements detailElements = detailDoc.select("div.book-detail-item");
+			for (Element e : detailElements) {
+				String text = e.text();
+				if (text.equals("产品特色")) {
+					System.out.println(e.select("div.book-detail-content").html());
+				}
+			}
+
 //			parseListPage(content3);
-			parseDetailPage(content3);
+//			parseDetailPage(content);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private static void parseDetailPage(String content) {
-		String url = "http://p.3.cn/prices/get?skuid=J_10538945&type=1&area=1_72_2840&callback=cnp";
+		String url = "https://p.3.cn/prices/get?skuid=J_11161337";
 		HttpGet get = new HttpGet(url);
 		CloseableHttpResponse response3 = null;
 		try {
@@ -92,14 +105,12 @@ public class HttpClientTestJd {
 			HttpEntity entity3 = response3.getEntity();
 			String content3 = EntityUtils.toString(entity3, "utf-8");
 			EntityUtils.consume(entity3);
-//			System.out.println(content3);
+			System.out.println(content3);
 //			System.out.println(content3.trim().substring(5, content3.length() -4));
 
 			JsonParser jsonParser = new JsonParser();
-			JsonReader jsonReader = new JsonReader(new StringReader(content3.trim().substring(5, content3.length() -4)));
-			jsonReader.setLenient(true);
-			JsonElement element = jsonParser.parse(jsonReader);
-			String price = element.getAsJsonObject().get("p").getAsString();
+			JsonElement element = jsonParser.parse(content3);
+			String price = element.getAsJsonArray().get(0).getAsJsonObject().get("m").getAsString();
 			System.out.println(price);
 		} catch (Exception e) {
 			e.printStackTrace();

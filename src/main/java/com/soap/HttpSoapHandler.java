@@ -1,6 +1,7 @@
 package com.soap;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -16,16 +17,28 @@ import java.nio.charset.Charset;
  * Created by yuwt on 2016/12/14.
  */
 public class HttpSoapHandler {
-	private static CloseableHttpClient client = HttpClients.createDefault();
+	private static CloseableHttpClient client;
+
+	static {
+		RequestConfig reqConfig = RequestConfig.custom()
+				.setConnectTimeout(10 * 1000)
+				.setSocketTimeout(10 * 1000)
+				.build();
+
+		client = HttpClients.custom()
+				.setDefaultRequestConfig(reqConfig)
+				.build();
+	}
 
 	public static void send() {
-		String url = "http://192.168.2.100:85/cipupdate.asmx";
+//		String url = "http://192.168.2.100:85/cipupdate.asmx";
+		String url = "http://192.168.2.155:8008/cipupdate.asmx";
 		HttpPost post = new HttpPost(url);
-		String noid = "1098632";
-		String price = "8.10";
+		String noid = "2706317";
+		String price = "38.40";
 		String chubanshijian = "";
 		String msg = SoapMessageGenerator.generate(noid, price, chubanshijian);
-		System.out.println(msg);
+//		System.out.println(msg);
 		ContentType contentType = ContentType.create("text/xml", Charset.forName("utf-8"));
 		StringEntity stringEntity = new StringEntity(msg, contentType);
 		post.setEntity(stringEntity);

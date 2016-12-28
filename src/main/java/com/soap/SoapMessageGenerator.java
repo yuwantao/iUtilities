@@ -15,6 +15,17 @@ public class SoapMessageGenerator {
 			"  </soap:Body>\n" +
 			"</soap:Envelope>";
 
+	private static final String msg12 = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+			"<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
+			"  <soap12:Body>\n" +
+			"    <exbook_cipupdate xmlns=\"http://tempuri.org/\">\n" +
+			"      <noid>noid_placeholder</noid>\n" +
+			"      <price>price_placeholder</price>\n" +
+			"      <chubanshijian>chubanshijian_placeholder</chubanshijian>\n" +
+			"    </exbook_cipupdate>\n" +
+			"  </soap12:Body>\n" +
+			"</soap12:Envelope>";
+
 	public static String generate(String noid, String price, String chubanshijian) {
 		return msg.replace("noid_placeholder", noid)
 				.replace("price_placeholder", price)
