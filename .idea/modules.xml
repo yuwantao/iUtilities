@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/iUtilities.iml" filepath="$PROJECT_DIR$/iUtilities.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../shrink-pdf/src/main/pdf-shrinker.iml" filepath="$PROJECT_DIR$/../shrink-pdf/src/main/pdf-shrinker.iml" />
-    </modules>
-  </component>
-</project>
